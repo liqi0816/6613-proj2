@@ -1,0 +1,27 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Baseline",
+            "type": "python",
+            "request": "launch",
+            "program": "${workspaceFolder}/main.py",
+            "args": [
+                "--scenario=multi-task-nc",
+                "--sub_dir=baseline-debug"
+            ],
+            "console": "integratedTerminal"
+        },
+        {
+            "name": "EWC",
+            "type": "python",
+            "request": "launch",
+            "program": "${workspaceFolder}/main_ewc.py",
+            "args": [
+                "--scenario=multi-task-nc",
+                "--sub_dir=ewc-debug"
+            ],
+            "console": "integratedTerminal"
+        }
+    ]
+}
