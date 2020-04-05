@@ -63,7 +63,7 @@ def main(args):
 
     opt = torch.optim.SGD(classifier.parameters(), lr=args.lr)
     criterion = torch.nn.CrossEntropyLoss()
-    ewc = ElasticWeightConsolidation(classifier, crit=criterion, lr=1e-4, weight=100)
+    ewc = ElasticWeightConsolidation(classifier, crit=criterion, lr=1e-4, weight=args.ewc_weight)
 
     # vars to update over time
     valid_acc = []
@@ -174,6 +174,8 @@ if __name__ == "__main__":
     parser.add_argument('--replay_examples', type=int, default=0,
                         help='data examples to keep in memory for each batch '
                              'for replay.')
+    parser.add_argument('--ewc_weight', type=int, default=100,
+                        help='weight for elastic weight consolidation.')
 
     # Misc
     parser.add_argument('--sub_dir', type=str, default="multi-task-nc",
