@@ -13,7 +13,9 @@ Please see [AI Project 2 Report](/README.assets/AI_Project2_Report.pdf)
 We followed the idea from *[Overcoming catastrophic forgetting in neural networks (EWC)](https://arxiv.org/abs/1612.00796)* and conducted experiments on *both* MINST *and* CORe50 datasets. Results shows that our model beats the Resnet-18 baseline by 2% on CORe50.
 
 # Running on MNIST and Fashion MNIST dataset
-`python ewc_mnist.py`
+```
+python ewc_mnist.py`
+```
 
 # Running on CoRe50 dataset
 ## Setup
