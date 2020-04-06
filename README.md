@@ -1,7 +1,7 @@
 # Full Project Report
 
 Please see [AI Project2 Report.pdf](README.assets/AI Project2 Report.pdf)<br>
-[pdf](/README.assets/AI_Project2_Report.pdf)
+[AI Project 2 Report](/README.assets/AI_Project2_Report.pdf)
 
 
 # By the end of the project due, we rank 2nd of the new classes task in this competition!
