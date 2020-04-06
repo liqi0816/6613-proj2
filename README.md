@@ -1,7 +1,7 @@
 # Full Project Report
 
 Please see [AI Project2 Report.pdf](README.assets/AI Project2 Report.pdf)<br>
-[Google](./README.assets/AI Project2 Report.pdf)
+[Google](http://www.google.com/)
 
 
 # By the end of the project due, we rank 2nd of the new classes task in this competition!
