@@ -3,6 +3,9 @@
 Please see [AI Project2 Report.pdf](README.assets/AI Project2 Report.pdf)
 
 # By the end of the project due, we rank 2nd of the new classes task in this competition!
+![current ranking](/README.assets/current_ranking.png)<br>
+
+
 
 # Summary
 
