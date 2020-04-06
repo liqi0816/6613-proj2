@@ -27,7 +27,7 @@ import torch
 from torch.autograd import Variable
 from .common import pad_data, shuffle_in_unison, check_ext_mem, check_ram_usage
 
-from ewc.elastic_weight_consolidation import ElasticWeightConsolidation
+from ewc.EWC import EWC
 from torch.utils.data import TensorDataset
 
 def train_net_ewc(optimizer, ewc, criterion, mb_size, x, y, t,
@@ -103,7 +103,7 @@ def train_net_ewc(optimizer, ewc, criterion, mb_size, x, y, t,
             _, pred_label = torch.max(logits, 1)
             correct_cnt += (pred_label == y_mb).sum()
             ewc_loss = maybe_cuda(torch.as_tensor(
-                ewc._compute_consolidation_loss(ewc.weight),
+                ewc.get_old_task_loss(),
             dtype=torch.float32), use_cuda=use_cuda)
             loss = criterion(logits, y_mb) + torch.min(
                 loss_explosion_cap * criterion(logits, y_mb), ewc_loss
