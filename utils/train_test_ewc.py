@@ -31,7 +31,7 @@ from ewc.elastic_weight_consolidation import ElasticWeightConsolidation
 from torch.utils.data import TensorDataset
 
 def train_net_ewc(optimizer, ewc, criterion, mb_size, x, y, t,
-                  train_ep, preproc=None, use_cuda=True, mask=None, loss_explosion_cap=5):
+                  train_ep, preproc=None, use_cuda=True, mask=None, ewc_explosion_multr_cap=15):
     """
     (EWC Version)
     Train a Pytorch model from pre-loaded tensors.
@@ -48,7 +48,7 @@ def train_net_ewc(optimizer, ewc, criterion, mb_size, x, y, t,
             preproc (func): test iterations.
             use_cuda (bool): if we want to use gpu or cpu.
             mask (bool): if we want to maks out some classes from the results.
-            loss_explosion_cap (int): limit max value of ewc loss.
+            ewc_explosion_multr_cap (int): limit max multiplier of ewc loss.
         Returns:
             ave_loss (float): average loss across the train set.
             acc (float): average accuracy over training.
@@ -89,6 +89,7 @@ def train_net_ewc(optimizer, ewc, criterion, mb_size, x, y, t,
 
         print("training ep: ", ep)
         correct_cnt, ave_loss = 0, 0
+        ewc_explosion_cap = maybe_cuda(torch.tensor(0.0), use_cuda=use_cuda)
         for it in range(it_x_ep):
 
             start = it * mb_size
@@ -102,12 +103,9 @@ def train_net_ewc(optimizer, ewc, criterion, mb_size, x, y, t,
 
             _, pred_label = torch.max(logits, 1)
             correct_cnt += (pred_label == y_mb).sum()
-            ewc_loss = maybe_cuda(torch.as_tensor(
-                ewc._compute_consolidation_loss(ewc.weight),
-            dtype=torch.float32), use_cuda=use_cuda)
-            loss = criterion(logits, y_mb) + torch.min(
-                loss_explosion_cap * criterion(logits, y_mb), ewc_loss
-            )
+            loss = criterion(logits, y_mb)
+            ewc_explosion_cap = torch.max(ewc_explosion_cap, ewc_explosion_multr_cap * loss)
+            loss += ewc_explosion_cap.data * maybe_cuda(torch.as_tensor(ewc._compute_consolidation_loss(ewc.weight), dtype=torch.float32), use_cuda=use_cuda).atan()
             ave_loss += loss.item()
 
             loss.backward()

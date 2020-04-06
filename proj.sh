@@ -1,14 +1,19 @@
 #!/bin/sh
 
 conda activate clvision-challenge
-( 
->> base.log &)
-( {
-python main.py     --scenario="multi-task-nc" --epochs="2" --sub_dir="baseline"
-python main_ewc.py --scenario="multi-task-nc" --epochs="2" --sub_dir="ewc50" --ewc_weight=50
-python main_ewc.py --scenario="multi-task-nc" --epochs="2" --sub_dir="ewc100" --ewc_weight=100
-python main_ewc.py --scenario="multi-task-nc" --epochs="2" --sub_dir="ewc300" --ewc_weight=300
-python main_ewc.py --scenario="multi-task-nc" --epochs="2" --sub_dir="ewc500" --ewc_weight=500
-python main_ewc.py --scenario="multi-task-nc" --epochs="2" --sub_dir="ewc1000" --ewc_weight=1000
-python main_ewc.py --scenario="multi-task-nc" --epochs="2" --sub_dir="ewc3000" --ewc_weight=3000
-} >> ewc.log &)
+
+set -x
+function main_ewc {
+    python main_ewc_submission.py \
+        --scenario="multi-task-nc" \
+        --sub_dir="ewc-$ewc_weight-$ewc_explosion_multr_cap-$(date '+%m%d%H%M')" \
+        --ewc_weight=$ewc_weight \
+        --ewc_explosion_multr_cap=$ewc_explosion_multr_cap
+}
+function main_ewc_var_weight {
+    ewc_weight=25 main_ewc
+    ewc_weight=50 main_ewc
+    ewc_weight=100 main_ewc
+}
+python main.py --scenario="multi-task-nc" --epochs="2" --sub_dir="baseline-$(date '+%m%d%H%M')"
+ewc_explosion_multr_cap=15 main_ewc_var_weight
