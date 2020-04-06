@@ -2,7 +2,7 @@
 
 Please see [AI Project2 Report.pdf](README.assets/AI Project2 Report.pdf)
 
-# By the end of the due, we rank 2nd in this competition!
+# By the end of the project due, we rank 2nd of the new classes task in this competition!
 
 # Summary
 
