@@ -14,7 +14,7 @@ We followed the idea from *[Overcoming catastrophic forgetting in neural network
 
 # Running on MNIST and Fashion MNIST dataset
 ```
-python ewc_mnist.py`
+python ewc_mnist.py
 ```
 
 # Running on CoRe50 dataset
