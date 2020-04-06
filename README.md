@@ -2,6 +2,8 @@
 
 Please see [AI Project2 Report.pdf](README.assets/AI Project2 Report.pdf)
 
+# By the end of the due, we currently ranked 2nd in this competition!
+
 # Summary
 
 We followed the idea from *[Overcoming catastrophic forgetting in neural networks (EWC)](https://arxiv.org/abs/1612.00796)* and conducted experiments on *both* MINST *and* CORe50 datasets. Results shows that our model beats the Resnet-18 baseline by 2% on CORe50.
