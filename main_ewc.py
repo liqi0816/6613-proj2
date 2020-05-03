@@ -60,6 +60,9 @@ def main(args):
     if args.classifier == 'ResNet18Ewc':
         classifier = models.resnet18(pretrained=True)
         classifier.fc = torch.nn.Linear(512, args.n_classes)
+    elif args.classifier == 'MnasNetEwc':
+        classifier = models.mnasnet1_0(pretrained=True)
+        classifier.fc = torch.nn.Linear(512, args.n_classes)
 
     opt = torch.optim.SGD(classifier.parameters(), lr=args.lr)
     criterion = torch.nn.CrossEntropyLoss()
@@ -161,7 +164,7 @@ if __name__ == "__main__":
 
     # Model
     parser.add_argument('-cls', '--classifier', type=str, default='ResNet18Ewc',
-                        choices=['ResNet18Ewc'])
+                        choices=['ResNet18Ewc', 'MnasNetEwc'])
 
     # Optimization
     parser.add_argument('--lr', type=float, default=0.01,
